@@ -2,7 +2,7 @@
 from google.cloud import language_v1
 
 # The text to analyze
-testing_text = u"I am so happy! This is a very happy sounding text!! :)"
+# testing_text = u"I am so happy! This is a very happy sounding text!! :)"
 
 def get_sentiment_score(text):
   # Instantiates a client
@@ -21,7 +21,7 @@ def get_sentiment_magnitude(text):
   return sentiment.magnitude
   
 
-print("SENTIMENT SCORE:")
-print(get_sentiment_score(testing_text))
-print("SENTIMENT MAGNITUDE:")
-print(get_sentiment_magnitude(testing_text))
+# print("SENTIMENT SCORE:")
+# print(get_sentiment_score(testing_text))
+# print("SENTIMENT MAGNITUDE:")
+# print(get_sentiment_magnitude(testing_text))

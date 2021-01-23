@@ -5,7 +5,7 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 import os 
-
+from nlp_analyze import get_sentiment_score 
 SECRET_KEY = os.getenv("token")
 TENOR_KEY = os.getenv("tenorkey")
 client = discord.Client()
@@ -19,14 +19,13 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('$gif'):
+    if message.content.startswith(''):
         vals = message.content.split(" ")[1:]
-        if vals[0] == "dog":
-            search_term = "LOL"
-        elif vals[0] == "im":
-            search_term = "bye"
+        mood = get_sentiment_score(" ".join(vals))
+        if mood < 0:
+            search_term = "lol"
         else: 
-            search_term = vals[0]
+            search_term = "sad"
         r = requests.get("https://api.tenor.com/v1/search?q=%s&key=%s&limit=1" % (search_term, TENOR_KEY))
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
