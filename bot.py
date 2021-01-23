@@ -41,10 +41,11 @@ async def on_message(message):
         mood = get_sentiment_score(" ".join(vals))
         author = message.author
         timestamp = message.created_at
+        server = message.guild.id
         channel = message.channel.id
-        
+
         # Save author id, mood, timestamp, channel
-        post = {"_id": uuid.uuid4(), "author": message.author.id, "mood": mood, "timestamp": timestamp, "channel": channel}
+        post = {"_id": uuid.uuid4(), "author": message.author.id, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
         collection.insert_one(post)
         await message.channel.send('accepted!')
 
