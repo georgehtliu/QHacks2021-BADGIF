@@ -4,7 +4,8 @@ import pandas as pd
 import random
 
 
-def get_random_word(word):
+def get_random_happy_word():
+    word = "happy"
     url = "https://www.enchantedlearning.com/wordlist/"+word+".shtml"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -16,4 +17,4 @@ def get_random_word(word):
     return got_word
 
 
-print(get_random_word("happy"))
+print(get_random_happy_word())s
