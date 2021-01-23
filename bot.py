@@ -6,7 +6,7 @@ import random
 from dotenv import load_dotenv
 import os 
 from nlp_analyze import get_sentiment_score 
-from scrape_word import get_random_happy_word
+from scrape_word import get_random_happy_word, get_random_sad_word
 # load
 load_dotenv()
 client = discord.Client()
@@ -32,7 +32,7 @@ async def on_message(message):
         if mood < 0:
             search_term = get_random_happy_word()
         else: 
-            search_term = "sad"
+            search_term = get_random_sad_word()
         r = requests.get("https://api.tenor.com/v1/random?q=%s&key=%s&limit=1" % (search_term, TENOR_KEY))
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
