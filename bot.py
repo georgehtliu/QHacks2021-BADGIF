@@ -43,11 +43,10 @@ async def on_message(message):
         timestamp = message.created_at
         channel = message.channel.id
         
-        
-        post = {"_id": uuid.uuid4(), "author": message.author.id, "score": 1}
+        # Save author id, mood, timestamp, channel
+        post = {"_id": uuid.uuid4(), "author": message.author.id, "mood": mood, "timestamp": timestamp, "channel": channel}
         collection.insert_one(post)
         await message.channel.send('accepted!')
-
 
         if mood < 0:
             search_term = get_random_happy_word()
@@ -59,16 +58,6 @@ async def on_message(message):
         await message.channel.send(good)
         await message.channel.send(search_term)
         await message.channel.send("%s %s %s %s" % (author, mood, timestamp, channel))
-        # post = {"_id": author, "mood": mood, "timestamp": timestamp, "channel": channel}
-        # collection.insert_one(post)
-        # await message.channel.send('accepted!')
-        # await savetodb(message, author, mood, timestamp, channel)
-
-
-# async def savetodb(message, author, mood, timestamp, channel):
-#     post = {"_id": author, "mood": mood, "timestamp": timestamp, "channel": channel}
-#     collection.insert_one(post)
-#     await message.channel.send('accepted!')
 
 
 client.run(SECRET_KEY)
