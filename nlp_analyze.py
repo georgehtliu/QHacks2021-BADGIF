@@ -21,7 +21,22 @@ def get_sentiment_magnitude(text):
   return sentiment.magnitude
   
 
-# print("SENTIMENT SCORE:")
-# print(get_sentiment_score(testing_text))
-# print("SENTIMENT MAGNITUDE:")
-# print(get_sentiment_magnitude(testing_text))
+def get_entity_link(text):
+  client = language_v1.LanguageServiceClient.from_service_account_json("./cred.json")
+  # Available types are PLAN_TEXT and HTML
+  type_ = language_v1.Document.Type.PLAIN_TEXT
+  language = "en"
+  document = {"content": text, "type_": type_, "language": language}
+  encoding_type = language_v1.EncodingType.UTF8
+  response = client.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
+  entity = response.entities[0]
+  link = ""
+  for metadata_name, metadata_value in entity.metadata.items():
+    if(metadata_name == "wikipedia_url"):
+      link = metadata_value
+  if(link == ""):
+    link = "http://en.wikipedia.org/wiki/"
+  return link
+
+# print(get_entity_link("Google, headquartered in Mountain View (1600 Amphitheatre Pkwy, Mountain View, CA 940430), unveiled the new Android phone for $799 at the Consumer Electronic Show. Sundar Pichai said in his keynote that users love their new Android phones."))
+print(get_entity_link("My iPhone just dided"))

@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from discord.ext import commands
 from nlp_analyze import get_sentiment_score 
+from nlp_analyze import get_entity_link
 from scrape_word import get_random_happy_word, get_random_sad_word
 import pymongo
 from pymongo import MongoClient
@@ -71,6 +72,7 @@ async def on_message(message):
     else:
         vals = message.content.split(" ")
         mood = get_sentiment_score(" ".join(vals))
+        ent_link = get_entity_link(" ".join(vals)) # JUST ADDED THISSSSSSSSSSSSSSSSSSSSSSSSS
         author = message.author
         timestamp = message.created_at
         server = message.guild.id
@@ -89,6 +91,7 @@ async def on_message(message):
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
 
+        await message.channel.send(ent_link) # JUST ADDED THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         await message.channel.send(good)
         await message.channel.send(search_term)
         await message.channel.send("%s %s %s %s" % (author, mood, timestamp, channel))
