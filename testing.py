@@ -35,4 +35,4 @@ async def on_message(message):
     
 
 
-client.run("""ODAyMzgxNDU0MTgwMjIwOTg4.YAuZ9g.-sk5ynRGuIaKn06bPy4u2cjpEYk""")
+client.run(SECRET_KEY)
