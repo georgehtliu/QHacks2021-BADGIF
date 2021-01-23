@@ -17,4 +17,4 @@ def get_random_happy_word():
     return got_word
 
 
-print(get_random_happy_word())s
+print(get_random_happy_word())
