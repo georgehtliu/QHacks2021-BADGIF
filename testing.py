@@ -4,8 +4,8 @@ import json
 # settings.py
 from dotenv import load_dotenv
 load_dotenv()
-
 import os 
+
 SECRET_KEY = os.getenv("token")
 TENOR_KEY = os.getenv("tenorkey")
 client = discord.Client()
