@@ -91,7 +91,11 @@ async def on_message(message):
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
 
-        await message.channel.send(ent_link) # JUST ADDED THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+        if(ent_link == "http://en.wikipedia.org/wiki/"):
+            print("nothing here")
+        else: 
+            await message.channel.send(ent_link) 
+        # await message.channel.send(ent_link) 
         await message.channel.send(good)
         await message.channel.send(search_term)
         await message.channel.send("%s %s %s %s" % (author, mood, timestamp, channel))
