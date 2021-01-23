@@ -28,7 +28,3 @@ def get_random_sad_word():
     got_word = words[index].get_text()
 
     return word+"-"+got_word
-
-
-print(get_random_sad_word())
-print(get_random_happy_word())

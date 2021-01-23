@@ -11,7 +11,9 @@ import pymongo
 from pymongo import MongoClient
 import urllib
 import uuid
-
+import matplotlib.pyplot as plt
+import numpy as np
+plt.style.use('seaborn-whitegrid')
 # load
 load_dotenv()
 # Env vars
@@ -35,8 +37,13 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    if message.content.startswith(''):
+    
+    if message.content.startswith('$stats'):
+        timestamps = [[x['timestamp'].strftime("%H:%M"), x['mood']] for x in collection.find() if message.author.id==x['author']]
+        await message.channel.send(timestamps)
+        timestamps = [[x['timestamp'].strftime("%H:%M"), x['mood']] for x in collection.find()]
+        await message.channel.send(timestamps)
+    else:
         vals = message.content.split(" ")
         mood = get_sentiment_score(" ".join(vals))
         author = message.author
@@ -59,6 +66,9 @@ async def on_message(message):
         await message.channel.send(good)
         await message.channel.send(search_term)
         await message.channel.send("%s %s %s %s" % (author, mood, timestamp, channel))
+
+
+
 
 
 client.run(SECRET_KEY)
