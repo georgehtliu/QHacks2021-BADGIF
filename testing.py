@@ -1,6 +1,12 @@
 import discord
 
-token = """ODAyMzgxNDU0MTgwMjIwOTg4.YAuZ9g.oKaqTNTOdsiLosb7Fz3ttHzv6G4"""
+# settings.py
+from dotenv import load_dotenv
+load_dotenv()
+
+import os 
+SECRET_KEY = os.getenv("token")
+
 client = discord.Client()
 
 @client.event
@@ -16,4 +22,4 @@ async def on_message(message):
         vals = message.content.split("")
         await message.channel.send(vals)
 
-client.run(token)
+client.run(SECRET_KEY)
