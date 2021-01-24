@@ -28,3 +28,8 @@ export const createTrans = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const deleteAllPosts = async (req, res) => {
+  await Post.remove({});
+  res.json({ message: "deleted all posts" });
+};
