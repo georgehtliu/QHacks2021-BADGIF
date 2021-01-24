@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { getPostsByUser } from "../actions/posts";
+import NavArrow from "./NavArrow"
 
 const { Search } = Input;
 const aboutStyle = {
@@ -22,21 +23,25 @@ const header = {
 };
 export default function About() {
   const dispatch = useDispatch();
-  const [username, SetUsername] = useState("");
+  const [toggle, setToggle] = useState(false)
+  const [username, setUsername] = useState("");
 
   const onSearch = function () {
     const val = username;
     console.log(username);
     let newUser = username.replace("#", "_");
+    setToggle(true);
     dispatch(getPostsByUser(newUser));
-    SetUsername("");
+    setUsername("");
   };
+
+  
 
   return (
     <div style={aboutStyle}>
       <Typography.Title style={header}>
         {" "}
-        Welcome to BadGIF <br /> Whats your username?{" "}
+        Welcome to BadGIF <br /> Whats your discord username?{" "}
       </Typography.Title>
       <Search
         enterButton="Search"
@@ -45,9 +50,9 @@ export default function About() {
         placeholder="input search text"
         value={username}
         onSearch={onSearch}
-        onChange={(e) => SetUsername(e.target.value)}
-        enterButton
+        onChange={(e) => setUsername(e.target.value)}
       />
+      {toggle ? <NavArrow/>: null}
     </div>
   );
 }

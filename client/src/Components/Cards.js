@@ -40,7 +40,7 @@ export default function Cards() {
   )
 
   return (
-    <div className="site-card-wrapper" style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+    <div id="moods" style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       <EasyMasonryComponent />
       {/* {posts.map((post) => (
 
