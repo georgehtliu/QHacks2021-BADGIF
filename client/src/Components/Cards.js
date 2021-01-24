@@ -8,7 +8,7 @@ export default function Cards() {
   const posts = useSelector((state) => state.posts);
   console.log(posts);
   return (
-    <div className="site-card-wrapper" style={{display: 'flex', flexWrap: 'wrap'}}>
+    <div id="moods" style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
       {posts.map((post) => (
 
         <div key={post.timestamp}>
