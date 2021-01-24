@@ -52,8 +52,8 @@ async def on_message(message):
         return
     
     if message.content.startswith('$data'):
-        timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if message.author.id==x['author']]
-        moods = [x['mood'] for x in collection.find() if message.author.id==x['author']]
+        timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if message.author.name==x['username']]
+        moods = [x['mood'] for x in collection.find() if message.author.name==x['username']]
         xList = timestamps
         yList = moods
         # xList.sort()
@@ -71,8 +71,6 @@ async def on_message(message):
         plt.title(f'{message.author}\'s Graph')
         plt.xlabel('Time')
         plt.ylabel('Sentiment')
-        # plt.xticks([])
-        # plt.yticks([])
         plt.savefig(fname='plot')
         await message.channel.send(file=discord.File('plot.png'))
         os.remove('plot.png')
@@ -104,6 +102,6 @@ async def on_message(message):
             await message.channel.send(ent_link)
         await message.channel.send(good)
         await message.channel.send(search_term)
-        await message.channel.send("%s %s %s %s" % (message.author, mood, timestamp, channel))
+        await message.channel.send("%s %s %s %s" % (username, mood, timestamp, channel))
 
 client.run(SECRET_KEY)
