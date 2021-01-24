@@ -1,26 +1,12 @@
 import React from 'react'
 import { Card, Col, Row } from 'antd';
+import GIFCard from './GIFCard'  
 import 'antd/dist/antd.css';
-export default function Cards(props) {
+export default function Cards() {
     return (
       <div className="site-card-wrapper">
-      <Row gutter={16}>
-        <Col span={8}>
-          <Card title="Card title" bordered={false}>
-            Card content
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Card title" bordered={false}>
-            Card content
-          </Card>
-        </Col>
-        <Col span={8}>
-          <Card title="Card title" bordered={false}>
-            Card content
-          </Card>
-        </Col>
-      </Row>
+      <GIFCard mood = {-1} user = "yobama"/>
+      <GIFCard mood = {1} user = "yobama"/>
     </div>
     )
 }
