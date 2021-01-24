@@ -1,10 +1,12 @@
-
+import About from './Components/About'
+import Cards from './Components/Cards'
 
 export default function App() {
   return (
     <div className="App">
-      <h1>This is the BadGif website</h1>
-      <p>search and display sentiment analytics here</p>
+      <About />
+      <Cards/>
+      
     </div>
   );
 }
