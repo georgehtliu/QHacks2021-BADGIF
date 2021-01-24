@@ -81,7 +81,7 @@ async def on_message(message):
         timestamp = message.created_at
         server = message.guild.id
         channel = message.channel.id
-        tag = message.author.name + "#" + message.author.discriminator
+        tag = message.author.name + "_" + message.author.discriminator
 
         # Save info
         post = {"_id": uuid.uuid4(), "username": tag, "message": message.content, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
