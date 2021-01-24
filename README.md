@@ -1,2 +1,2 @@
 # QHack2021-BADGIF
-Hello everyone. 
+Devpost: https://devpost.com/software/badgif
