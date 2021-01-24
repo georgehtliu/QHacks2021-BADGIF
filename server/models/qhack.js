@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const qhackSchema = mongoose.Schema({
-  author: Number,
+  username: String,
+  message: String,
   mood: Number,
-  timestamp: Date,
+  timestamp: Number,
   server: Number,
   channel: Number,
 });
