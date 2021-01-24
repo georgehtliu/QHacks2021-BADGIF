@@ -11,6 +11,17 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getUserPosts = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const postsByUser = await Post.find({ username: id });
+    res.status(200).json(postsByUser);
+  } catch (error) {
+    res.status(404).send("failed");
+  }
+};
+
 export const createTrans = async (req, res) => {
   const post = {
     author: 6969696969696969696969,
