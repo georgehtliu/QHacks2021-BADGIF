@@ -18,18 +18,19 @@ export default function GIFCard(props) {
 
     
     const moodColor = (moodvalue) => {
-        var hue=(((1-moodvalue)/2)*120).toString(10)
+        var hue=(((moodvalue+1)/2)*120).toString(10)
         return hslToHex(hue, 60, 50)
     }
 
     return (
         <>
-            <Card title = {props.user} style ={{display: 'grid', width:300, margin:10}} bordered = {true} 
+            <Card style ={{display: 'grid', width:300, margin:10}}
             hoverable={true} 
             headStyle={{backgroundColor:moodColor(props.mood)}}
             bodyStyle={{backgroundColor:moodColor(props.mood), color: "black", fontSize: "1.5em"}}>
-                Mood: {props.mood} <br/>
-                "{props.message}"
+                User: {props.user} <br/>
+                Mood: {Math.round(props.mood * 100) / 100} <br/>
+                Message: "{props.message}"
 
             </Card>
         </>
