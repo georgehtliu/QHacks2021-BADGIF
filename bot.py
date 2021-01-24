@@ -52,7 +52,7 @@ async def on_message(message):
         return
     
     if message.content.startswith('$data'):
-        tag = message.author.name + "#" + message.author.discriminator
+        tag = message.author.name + "_" + message.author.discriminator
         timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if tag==x['username']]
         moods = [x['mood'] for x in collection.find() if tag==x['username']]
         xList = timestamps
