@@ -80,13 +80,12 @@ async def on_message(message):
         vals = message.content.split(" ")
         mood = get_sentiment_score(" ".join(vals))
         ent_link = get_entity_link(" ".join(vals)) # JUST ADDED THISSSSSSSSSSSSSSSSSSSSSSSSS
-        author = message.author
         timestamp = message.created_at
         server = message.guild.id
         channel = message.channel.id
 
         # Save author id, mood, timestamp, channel
-        post = {"_id": uuid.uuid4(), "author": message.author.id, "username": message.author.name, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
+        post = {"_id": uuid.uuid4(), "username": message.author.name, "message": message.content, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
         collection.insert_one(post)
         await message.channel.send('accepted!')
 
