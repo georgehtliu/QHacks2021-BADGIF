@@ -79,13 +79,14 @@ async def on_message(message):
     else:
         vals = message.content.split(" ")
         mood = get_sentiment_score(" ".join(vals))
-        ent_link = get_entity_link(" ".join(vals)) # JUST ADDED THISSSSSSSSSSSSSSSSSSSSSSSSS
+        ent_link = get_entity_link(" ".join(vals))
         timestamp = message.created_at
         server = message.guild.id
         channel = message.channel.id
+        tag = message.author.name + "#" + message.author.discriminator
 
-        # Save author id, mood, timestamp, channel
-        post = {"_id": uuid.uuid4(), "username": message.author.name, "message": message.content, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
+        # Save info
+        post = {"_id": uuid.uuid4(), "username": tag, "message": message.content, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
         collection.insert_one(post)
         await message.channel.send('accepted!')
 
@@ -100,10 +101,9 @@ async def on_message(message):
         if(ent_link == ""):
             print("No Wikipedia available")
         else: 
-            await message.channel.send(ent_link) 
-        # await message.channel.send(ent_link) 
+            await message.channel.send(ent_link)
         await message.channel.send(good)
         await message.channel.send(search_term)
-        await message.channel.send("%s %s %s %s" % (author, mood, timestamp, channel))
+        await message.channel.send("%s %s %s %s" % (message.author, mood, timestamp, channel))
 
 client.run(SECRET_KEY)
