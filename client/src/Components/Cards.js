@@ -1,12 +1,23 @@
-import React from 'react'
-import { Card, Col, Row } from 'antd';
-import GIFCard from './GIFCard'  
-import 'antd/dist/antd.css';
+import React from "react";
+import { Card, Col, Row } from "antd";
+import GIFCard from "./GIFCard";
+import "antd/dist/antd.css";
+import { useSelector } from "react-redux";
+
 export default function Cards() {
-    return (
-      <div className="site-card-wrapper">
-      <GIFCard mood = {-1} user = "yobama"/>
-      <GIFCard mood = {1} user = "yobama"/>
+  const posts = useSelector((state) => state.posts);
+  console.log(posts);
+  return (
+    <div className="site-card-wrapper">
+      {posts.map((post) => (
+        <div key={post.timestamp}>
+          <GIFCard
+            mood={post.mood}
+            user={post.username}
+            message={post.message}
+          />
+        </div>
+      ))}
     </div>
-    )
+  );
 }
