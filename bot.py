@@ -95,7 +95,7 @@ async def on_message(message):
         if mood < 0:
             search_term = get_random_happy_word()
         else: 
-            search_term = get_random_sad_word()
+            search_term = "fortnitedance"
         r = requests.get("https://api.tenor.com/v1/random?q=%s&key=%s&limit=1" % (search_term, TENOR_KEY))
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
