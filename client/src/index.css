@@ -17,10 +17,6 @@ body {
       monospace;
   }
 
-*{
-  background-color:#111d2c;
-  color:#b7e3fa;
-}
 
 .ant-card > ant-card-bordered{
   border: 0;

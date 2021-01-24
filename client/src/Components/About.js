@@ -3,6 +3,7 @@ import { Typography, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { getPostsByUser } from "../actions/posts";
 import NavArrow from "./NavArrow"
+
 const { Search } = Input;
 const aboutStyle = {
   height: "100vh",
