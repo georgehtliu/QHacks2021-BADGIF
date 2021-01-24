@@ -25,9 +25,9 @@ def get_entity_link(text):
   document = {"content": text, "type_": type_, "language": language}
   encoding_type = language_v1.EncodingType.UTF8
   response = client.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
-  entity = response.entities[0]
-  link = "http://en.wikipedia.org/wiki/"
+  link = ""
   try:
+    entity = response.entities[0]
     for metadata_name, metadata_value in entity.metadata.items():
       if(metadata_name == "wikipedia_url"):
         link = metadata_value

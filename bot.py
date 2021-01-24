@@ -98,8 +98,8 @@ async def on_message(message):
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
 
-        if(ent_link == "http://en.wikipedia.org/wiki/"):
-            print("nothing here")
+        if(ent_link == ""):
+            print("No Wikipedia available")
         else: 
             await message.channel.send(ent_link) 
         # await message.channel.send(ent_link) 
