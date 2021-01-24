@@ -16,7 +16,7 @@ import pymongo
 from pymongo import MongoClient
 import urllib
 import uuid
-plt.style.use('seaborn-whitegrid')
+plt.style.use('seaborn-darkgrid')
 # load
 load_dotenv()
 # Env vars
@@ -54,18 +54,25 @@ async def on_message(message):
     if message.content.startswith('$data'):
         timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if message.author.id==x['author']]
         moods = [x['mood'] for x in collection.find() if message.author.id==x['author']]
-        await message.channel.send(timestamps)
-        await message.channel.send(moods)
         xList = timestamps
         yList = moods
         # xList.sort()
         # yList.sort()
         x = np.array(xList)
         y = np.array(yList)
-        arr = np.vstack((x, y))
+        # x_r = np.round(x, 3)
+        # y_r = np.round(y, 2)
+        await message.channel.send(x)
+        await message.channel.send(y)
         plt.clf()
-        plt.plot(arr[0], arr[1])
+        plt.plot(x, y)
+        plt.gcf().autofmt_xdate()
+        plt.ylim(-1.0,1.0)
         plt.title(f'{message.author}\'s Graph')
+        plt.xlabel('Time')
+        plt.ylabel('Sentiment')
+        # plt.xticks([])
+        # plt.yticks([])
         plt.savefig(fname='plot')
         await message.channel.send(file=discord.File('plot.png'))
         os.remove('plot.png')
