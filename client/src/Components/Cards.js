@@ -13,7 +13,7 @@ export default function Cards() {
         <div key={post.timestamp}>
           <GIFCard
             mood={post.mood}
-            user={post.username}
+            user={post.username.replace("_", "#")}
             message={post.message}
           />
         </div>
