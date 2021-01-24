@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography, Input, Button } from "antd";
 import { useDispatch } from "react-redux";
 import { getPostsByUser } from "../actions/posts";
+import { useSelector } from "react-redux";
 import NavArrow from "./NavArrow"
 
 const { Search } = Input;
@@ -35,7 +36,7 @@ export default function About() {
     setUsername("");
   };
 
-  
+  const posts = useSelector((state) => state.posts);
 
   return (
     <div style={aboutStyle}>
@@ -52,7 +53,7 @@ export default function About() {
         onSearch={onSearch}
         onChange={(e) => setUsername(e.target.value)}
       />
-      {toggle ? <NavArrow/>: null}
+      {posts.length > 0 ? <NavArrow/>: null}
     </div>
   );
 }
