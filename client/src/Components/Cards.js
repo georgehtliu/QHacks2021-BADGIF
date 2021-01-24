@@ -8,8 +8,9 @@ export default function Cards() {
   const posts = useSelector((state) => state.posts);
   console.log(posts);
   return (
-    <div className="site-card-wrapper">
+    <div className="site-card-wrapper" style={{display: 'flex', flexWrap: 'wrap'}}>
       {posts.map((post) => (
+
         <div key={post.timestamp}>
           <GIFCard
             mood={post.mood}

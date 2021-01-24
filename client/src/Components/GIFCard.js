@@ -24,11 +24,13 @@ export default function GIFCard(props) {
 
     return (
         <>
-            <Card title = {props.user}
+            <Card title = {props.user} style ={{display: 'grid', width:300, margin:10}} bordered = {true} 
+            hoverable={true} 
             headStyle={{backgroundColor:moodColor(props.mood)}}
-            bodyStyle={{backgroundColor:moodColor(props.mood)}}>
-                Mood: {props.mood}
-                Message: {props.message}
+            bodyStyle={{backgroundColor:moodColor(props.mood), color: "black", fontSize: "1.5em"}}>
+                Mood: {props.mood} <br/>
+                "{props.message}"
+
             </Card>
         </>
     )
