@@ -6,6 +6,7 @@ import random
 # settings.py
 from dotenv import load_dotenv
 import os
+from random import randint
 import numpy as np
 import matplotlib.pyplot as plt
 from discord.ext import commands
@@ -85,13 +86,18 @@ async def on_message(message):
         timestamp = message.created_at
         server = message.guild.id
         channel = message.channel.id
+        wikiSent = False
         tag = message.author.name + "_" + message.author.discriminator
 
         # Save info
         post = {"_id": uuid.uuid4(), "username": tag, "message": message.content, "mood": mood, "timestamp": timestamp, "server": server, "channel": channel}
         collection.insert_one(post)
-        await message.channel.send('accepted!')
-
+        if randint(0,10) == 5:
+            try:
+                await message.channel.send(ent_link)
+                wikiSent = not wikiSent
+            except:
+                print("wiki not found")
         if mood < 0:
             search_term = get_random_happy_word()
         else: 
@@ -99,13 +105,7 @@ async def on_message(message):
         r = requests.get("https://api.tenor.com/v1/random?q=%s&key=%s&limit=1" % (search_term, TENOR_KEY))
         parsed = json.loads(r.content)
         good = parsed['results'][0]['media'][0]['tinygif']['url']
-
-        if(ent_link == ""):
-            print("No Wikipedia available")
-        else: 
-            await message.channel.send(ent_link)
-        await message.channel.send(good)
-        await message.channel.send(search_term)
-        await message.channel.send("%s %s %s %s" % (tag, mood, timestamp, channel))
+        if not wikiSent:
+            await message.channel.send(good)
 
 client.run(SECRET_KEY)
