@@ -52,8 +52,9 @@ async def on_message(message):
         return
     
     if message.content.startswith('$data'):
-        timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if message.author.name==x['username']]
-        moods = [x['mood'] for x in collection.find() if message.author.name==x['username']]
+        tag = message.author.name + "_" + message.author.discriminator
+        timestamps = [x['timestamp'].strftime("%H:%M:%S") for x in collection.find() if tag==x['username']]
+        moods = [x['mood'] for x in collection.find() if tag==x['username']]
         xList = timestamps
         yList = moods
         # xList.sort()
@@ -71,6 +72,9 @@ async def on_message(message):
         plt.title(f'{message.author}\'s Graph')
         plt.xlabel('Time')
         plt.ylabel('Sentiment')
+        tick_frequency = round(len(x)/10)+1
+        ax = plt.gca()
+        ax.set_xticks(ax.get_xticks()[::tick_frequency])
         plt.savefig(fname='plot')
         await message.channel.send(file=discord.File('plot.png'))
         os.remove('plot.png')
