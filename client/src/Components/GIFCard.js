@@ -8,7 +8,7 @@ export default function GIFCard(props) {
 
     return (
         <>
-            <Card title = {props.user} style = {{backgroundColor: "rgba(255,255,255,0.0)" }}
+            <Card title = {props.user}
             headStyle={{backgroundColor:moodColor}}
             bodyStyle={{backgroundColor:moodColor}}>
                 Mood: {props.mood}

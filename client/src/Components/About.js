@@ -28,7 +28,6 @@ export default function About() {
         <div style = {aboutStyle} >
           <Typography.Title style = {header}> Welcome to BadGIF <br/> Whats your username? </Typography.Title>
           <Search enterButton="Search" size = "large" style = {smaller}placeholder="input search text" value = {username} onSearch={onSearch} onChange = {(e) => SetUsername(e.target.value)} enterButton />
-
         </div >
     )
 }
