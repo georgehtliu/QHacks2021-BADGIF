@@ -102,6 +102,6 @@ async def on_message(message):
             await message.channel.send(ent_link)
         await message.channel.send(good)
         await message.channel.send(search_term)
-        await message.channel.send("%s %s %s %s" % (username, mood, timestamp, channel))
+        await message.channel.send("%s %s %s %s" % (tag, mood, timestamp, channel))
 
 client.run(SECRET_KEY)
